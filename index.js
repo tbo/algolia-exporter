@@ -3,7 +3,7 @@ const fs = require('fs');
 const algoliasearch = require('algoliasearch');
 const handleError = err => err && console.error(err.message || err);
 const argv = require('yargs')
-      .usage('Usage: $0 [options] <api-key> <index>')
+      .usage('Usage: $0 [options] <app-key> <api-key> <index>')
       .demand(2)
       .help('h')
       .alias('o', 'output')
@@ -12,9 +12,9 @@ const argv = require('yargs')
       .string('o')
       .argv;
 
-const [apiKey, indexName] = argv._;
+const [appKey, apiKey, indexName] = argv._;
 const filename = argv.f;
-const client = algoliasearch('EFOUNBQIFQ', apiKey);
+const client = algoliasearch(appKey, apiKey);
 const index = client.initIndex(indexName);
 const browser = index.browseAll();
 let hits = [];
